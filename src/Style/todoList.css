@@ -24,12 +24,17 @@
     display: flex;
 }
 
+.checkBox {
+    cursor: pointer;
+}
+
 .finish {
     background-color: #FDD037;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
     margin: 5px;
+
 }
 
 .notfinish {
@@ -37,7 +42,7 @@
     width: 10px;
     height: 10px;
     border: 2px solid white;
-    border-radius: 50px;
+    border-radius: 7px;
     margin: 5px;
 }
 

@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../../Style/todo.css"
+import { logDOM } from "@testing-library/react";
 
-function Todo({todo}) {
-    console.log(todo.completed)
+function Todo(props) {
+    let setTodo = props.setTodo
+    let todo = props.todo
 
-    function toggleFinish() {
-        console.log("test")
-        todo.completed = !todo.completed;
+    function handleClick() {
+        // console.log("mince")
+        setTodo(props.nameList, todo.id);
     }
-
-    console.log(todo)
 
     return (
         <div className="todo">
-            <div className="headerTodo" onClick={toggleFinish}>
-                <div className={todo.completed ? "finish" : "notfinish"}></div>
-                <h4>{todo.titleToDo}</h4>
+            <div className="headerTodo">
+                <div className={`checkBox ${todo.completed ? "finish" : "notfinish"}`} onClick={handleClick}></div>
+                <h4>{todo.title}</h4>
             </div>
-            <p>{todo.todo}</p>
+            <p>{todo.title}</p>
         </div>
     );
 }

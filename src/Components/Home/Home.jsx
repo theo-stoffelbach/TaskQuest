@@ -1,79 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from "./TodoList";
 import "../../Style/home.css"
+import todo from "./Todo";
 
 function Home() {
-    const [todoLists, setTodoLists] = useState([]);
+    const [todoLists, setTodoLists] = useState(null)
+
 
     useEffect(() => {
-        function getData() {
-            // setTodoLists(await axios.get())
-            setTodoLists([
-                {
-                    id: 1,
-                    nameTodo: "Home",
-                    todo: [
-                        {
-                            id: 1,
-                            titleToDo: "Title One !",
-                            do: "Something",
-                            completed: false
-                        },
-                        {
-                            id: 2,
-                            titleToDo: "Title two !",
-                            todo: "Other something",
-                            completed: false
-                        },
-                        {
-                            id: 3,
-                            titleToDo: "Toulouse man !",
-                            todo: "Other something",
-                            completed: false
-                        },]
-                },
-                {
-                    id: 2,
-                    nameTodo: "Usualy",
-                    todo: [
-                        {
-                            id: 1,
-                            titleToDo: "Title two !",
-                            do: "Something",
-                            completed: false
-                        },
-                        {
-                            id: 2,
-                            titleToDo: "Title two !",
-                            todo: "Other something",
-                            completed: false
-                        },
-                        {
-                            id: 3,
-                            titleToDo: "Toulouse man !",
-                            todo: "Other something",
-                            completed: false
-                        },
-                    ]
-                }
-            ])
 
-            console.log("end")
+
+        function createToDo() {
+            fetch('https://jsonplaceholder.typicode.com/todos')
+                .then(response => response.json())
+                .then(response => {
+                    const responsePart1 = {
+                        id: 1,
+                        nameTodo: "Maison",
+                        todo: response.splice(0, 5)
+                    }
+                    const responsePart2 = {
+                        id: 3,
+                        nameTodo: "Minecraft",
+                        todo: response.splice(0, 5)
+                    }
+
+                    setTodoLists([responsePart1, responsePart2]);
+                })
         }
 
-        return () => {
-            console.log("merde ")
-            getData();
-        };
-    }, [])
+        return () => createToDo()
+    }, []);
 
-    if (todoLists === []) {
-        console.log("Not found :/ ")
+    useEffect(() => {
+        if (todoLists !== null) console.log(todoLists)
+    }, [todoLists]);
+
+    if (todoLists === null) {
+        console.log("Loading ... ")
     } else {
+
         return (
             <div id="allTodos">
                 {todoLists.map((todoList, index) => {
-                    return (<TodoList key={index} props={todoList}/>)
+
+
+                    function toggleToDoCompleted(listId, id) {
+                        console.log("i : " + id)
+                        const todos = [...todoLists];
+                        // console.log(todos)
+                        todos.forEach(Lists => {
+                            if (Lists.id === listId) {
+                                // console.log("Lists.id")
+                                // console.log(Lists.todo)
+                                Lists.todo.forEach(todo => {
+                                    if (todo.id === id) todo.completed = !todo.completed;
+                                })
+                            }
+                        })
+                        // console.log(props)
+                        setTodoLists(todos)
+                    }
+
+                    return (<TodoList key={index}
+                                      props={todoList}
+                                      setTodo={setTodoLists}
+                                      changeTodo={toggleToDoCompleted}/>)
                 })}
             </div>
         );
