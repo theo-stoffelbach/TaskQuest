@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from "./TodoList";
 import "../../Style/home.css"
-import todo from "./Todo";
 
 function Home() {
     const [todoLists, setTodoLists] = useState(null)
@@ -43,8 +42,6 @@ function Home() {
         return (
             <div id="allTodos">
                 {todoLists.map((todoList, index) => {
-
-
                     function toggleToDoCompleted(listId, id) {
                         console.log("i : " + id)
                         const todos = [...todoLists];
@@ -62,10 +59,26 @@ function Home() {
                         setTodoLists(todos)
                     }
 
+                    function toggleToDoEdit(listId, id, value) {
+                        console.log("i : ")
+                        const todos = [...todoLists];
+                        // console.log(todos)
+                        todos.forEach(Lists => {
+                            if (Lists.id === listId) {
+                                Lists.todo.forEach(todo => {
+                                    if (todo.id === id) todo.title = value;
+                                })
+                            }
+                        })
+                        // console.log(props)
+                        setTodoLists(todos)
+                    }
+
                     return (<TodoList key={index}
                                       props={todoList}
                                       setTodo={setTodoLists}
-                                      changeTodo={toggleToDoCompleted}/>)
+                                      changeTodo={toggleToDoCompleted}
+                                      todoEdit={toggleToDoEdit}/>)
                 })}
             </div>
         );

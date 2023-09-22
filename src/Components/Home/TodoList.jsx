@@ -16,6 +16,7 @@ function TodoList(props) {
                     return <Todo key={todo.id}
                                  todo={todo}
                                  setTodo={props.changeTodo}
+                                 todoEdit={props.todoEdit}
                                  nameList={props.props.id}
                     />
                 })}
