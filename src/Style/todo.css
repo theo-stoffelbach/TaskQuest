@@ -1,3 +1,6 @@
+input {
+    all: unset;
+}
 
 .headerTodos {
     display: flex;
@@ -13,6 +16,7 @@
 
 .headerTodo {
     display: flex;
+    align-items: center;
 }
 
 .checkBox {
@@ -21,11 +25,12 @@
 
 .finish {
     background-color: #FDD037;
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    margin: 5px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #FDD037;
 
+    border-radius: 7px;
+    margin-right: 5px;
 }
 
 .notfinish {
@@ -33,13 +38,13 @@
     width: 10px;
     height: 10px;
     border: 2px solid white;
-    border-radius: 7px;
-    margin: 5px;
+    border-radius: 100px;
+    margin-right: 5px;
 }
 
 .headerTodo h4 {
     color: #FDD037;
-    width: 100%;
+    /*width: 100%;*/
     margin: 0 0 0 5px;
     font-size: 18px;
 }
@@ -53,6 +58,29 @@
     justify-content: space-between;
 
     grid-template-columns: 1fr 50px;
+}
+
+.bottomTodo {
+    display: grid;
+    justify-content: space-between;
+
+    grid-template-columns: 1fr 50px;
+}
+
+.bottomTodo p {
+    height: 22px;
+}
+
+.bottomTodo input {
+    margin: 16px 0;
+    border: 0 solid #fff;
+    background-color: #12ADC1;
+    color: white;
+    font-size: 16px;
+
+    font-family: roboto, serif;
+    font-weight: normal;
+    height: 22px;
 }
 
 .bottomTodo .editIconContainer {
@@ -69,3 +97,4 @@
     width: 25px;
     height: 25px;
 }
+

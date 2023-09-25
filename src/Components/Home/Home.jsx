@@ -7,8 +7,6 @@ function Home() {
 
 
     useEffect(() => {
-
-
         function createToDo() {
             fetch('https://jsonplaceholder.typicode.com/todos')
                 .then(response => response.json())
@@ -31,9 +29,9 @@ function Home() {
         return () => createToDo()
     }, []);
 
-    useEffect(() => {
-        if (todoLists !== null) console.log(todoLists)
-    }, [todoLists]);
+    // useEffect(() => {
+    //     if (todoLists !== null) console.log(todoLists)
+    // }, [todoLists]);
 
     if (todoLists === null) {
         console.log("Loading ... ")
