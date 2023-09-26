@@ -1,0 +1,21 @@
+#todoList {
+    margin-left: 10px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #0295a9;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.headerTodo h4 {
+    color: #FDD037;
+    width: 100%;
+    margin: 0 0 0 5px;
+    font-size: 18px;
+}
+
+.todo p {
+    color: white;
+    font-size: 16px;
+}
