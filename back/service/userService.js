@@ -1,7 +1,10 @@
 const userModel = require('../model/user.model');
 const testModel = require('../model/test.model');
 
-const todoListTest = [
+const nom = "theo";
+const prenom = "theos123";
+
+const listtodo = [
     {
         namelisttodo: "Home",
         todos: [
@@ -45,27 +48,49 @@ const todoListTest = [
 ]
 
 module.exports.register = async (username, password) => {
-    const listtodo = todoListTest;
-
     try {
-        console.log("essaye")
-        const user = await userModel.create({username, password, listtodo});
-        console.log("ca marche")
-        return user
+        return await userModel.create({username, password, listtodo});
     } catch (err) {
         return "error to put data in DB" + err;
     }
 }
 
-module.exports.test = async () => {
-    const listtodo = todoListTest;
+module.exports.updateUserService = async (id, changeValue) => {
     try {
-        let nom = "theo";
-        let prenom = "theos123";
-        console.log("essaye")
-        const user = await testModel.create({nom, prenom});
-        console.log("ca marche")
-        return user
+        return await userModel.findOneAndUpdate(
+            {_id: id},
+            changeValue
+        );
+    } catch (err) {
+        return "error to put data in DB" + err;
+    }
+}
+
+
+// try {
+//     const articleUpdate = await articlesModel.findOneAndUpdate(
+//         {title: article.title},
+//         {
+//             $set: {
+//                 releaseDate: articleScrapped.releaseDate,
+//                 image: articleScrapped.image,
+//                 stock: articleScrapped.stock,
+//                 description: articleScrapped.description,
+//                 link: articleScrapped.link
+//             }
+//         },
+//         {new : true, upsert: true, setDefaultsOnInsert: true})
+//     if (!article) {
+//         return "Bug durring the writting Data Article not found ?! :/ : " + err;
+//     }
+//     return "Successfully to update Article : " + article.title + "( id : " + article._id + " ) ";
+// } catch (err) {
+//     return "Bug durring the update Data :/ : " + err;
+// }
+
+module.exports.test = async () => {
+    try {
+        return await testModel.create({nom, prenom});
     } catch (err) {
         return "error to put data in DB" + err;
     }
