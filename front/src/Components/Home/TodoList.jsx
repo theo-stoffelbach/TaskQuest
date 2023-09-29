@@ -6,7 +6,7 @@ import todo from "./Todo";
 function TodoList(props) {
 
     return (
-        <div id="todoList">
+        <div className="todoList">
             <div className="headerTodos">
                 <h2>{props.props.nameTodo}</h2>
                 <h3>{props.props.todo.length}</h3>

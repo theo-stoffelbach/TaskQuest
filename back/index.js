@@ -3,16 +3,15 @@ const app = express()
 const port = 8080
 const userCtr = require('./Controller/userCtr')
 require('./db/db');
+const userRouter = require("./router/userRoute");
+const bodyParser = require("body-parser");
+const cors = require('cors');
 
-app.get("/api", userCtr.getAllUser)
-app.get("/register", userCtr.register)
-// articleRouter.post("/", articles.register)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-// })
-//
-// app.get('/yes', UserControler.UserCont)
+app.use("/api", userRouter)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

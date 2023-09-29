@@ -1,4 +1,4 @@
-#todoList {
+.todoList {
     margin-left: 10px;
     width: 350px;
     display: flex;
@@ -6,16 +6,13 @@
     border: 5px solid #0295a9;
     border-radius: 25px;
     padding: 5px;
+
 }
 
-.headerTodo h4 {
-    color: #FDD037;
-    width: 100%;
-    margin: 0 0 0 5px;
-    font-size: 18px;
+.todos {
+    padding: 10px;
+    background-color: #12ADC1;
+
+    border-radius: 0 0 15px 15px;
 }
 
-.todo p {
-    color: white;
-    font-size: 16px;
-}

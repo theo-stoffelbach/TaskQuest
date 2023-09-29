@@ -1,64 +1,71 @@
 const userModel = require('../model/user.model');
+const testModel = require('../model/test.model');
 
 const todoListTest = [
     {
-        id: 1,
-        nameTodo: "Home",
-        todo: [
+        namelisttodo: "Home",
+        todos: [
             {
-                id: 1,
                 titleToDo: "Title One !",
-                do: "Something",
+                description: "Something",
                 completed: false
             },
             {
-                id: 2,
                 titleToDo: "Title two !",
-                todo: "Other something",
+                description: "Other something",
                 completed: false
             },
             {
-                id: 3,
                 titleToDo: "Toulouse man !",
-                todo: "Other something",
+                description: "Other something",
                 completed: false
-            },]
+            },
+        ]
     },
     {
-        id: 2,
-        nameTodo: "Usualy",
-        todo: [
+        namelisttodo: "Usualy",
+        todos: [
             {
-                id: 1,
                 titleToDo: "Title two !",
-                do: "Something",
+                description: "Something",
                 completed: false
             },
             {
-                id: 2,
                 titleToDo: "Title two !",
-                todo: "Other something",
+                description: "Other something",
                 completed: false
             },
             {
-                id: 3,
                 titleToDo: "Toulouse man !",
-                todo: "Other something",
+                description: "Other something",
                 completed: false
             },
         ]
     }
 ]
 
-module.exports.register = async () => {
-    try {
-        return await userModel.create({
-            ìd: 0,
-            username: "Snake",
-            password: "Snake123",
-            listtodos: todoListTest
+module.exports.register = async (username, password) => {
+    const listtodo = todoListTest;
 
-        });
+    try {
+        console.log("essaye")
+        const user = await userModel.create({username, password, listtodo});
+        console.log("ca marche")
+        return user
+    } catch (err) {
+        return "error to put data in DB" + err;
+    }
+}
+
+module.exports.test = async () => {
+    const listtodo = todoListTest;
+    try {
+        let nom = "theo";
+        let prenom = "theos123";
+        console.log("essaye")
+        const user = await testModel.create({nom, prenom});
+        console.log("ca marche")
+        return user
     } catch (err) {
         return "error to put data in DB" + err;
     }

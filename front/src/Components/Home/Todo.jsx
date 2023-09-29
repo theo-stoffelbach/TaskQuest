@@ -32,7 +32,6 @@ function Todo(props) {
                 <div className={`checkBox ${todo.completed ? "finish" : "notfinish"}`} onClick={handleClick}></div>
                 <h4>{todo.title}</h4>
             </div>
-
             <div className="bottomTodo">
                 {edit ?
                     (<input type="text" value={todo.title} onChange={e => OnchangeEdit(e)}/>) :
@@ -41,7 +40,7 @@ function Todo(props) {
                 }
 
                 <div className="editIconContainer" onClick={handleClickEdit}>
-                    <FontAwesomeIcon className="editIcon" icon={faPenToSquare}/>
+                    <FontAwesomeIcon className="editIcon" icon={faPenToSquare} style={{color: "#ffffff",}}/>
                 </div>
             </div>
         </div>

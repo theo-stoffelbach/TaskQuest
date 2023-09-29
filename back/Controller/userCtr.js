@@ -6,7 +6,15 @@ module.exports.userCount = async (req, res) => {
 }
 
 module.exports.register = async (req, res) => {
-    const user = await userService.register();
+    const {name, password} = req.body;
+
+    const user = await userService.register(name, password);
+    if (user) res.status(201).json({user: user})
+    else res.status(404).json({message: "404 Not found ..."})
+}
+
+module.exports.testC = async (req, res) => {
+    const user = await userService.test();
     if (user) res.status(201).json({user: user})
     else res.status(404).json({message: "404 Not found ..."})
 }

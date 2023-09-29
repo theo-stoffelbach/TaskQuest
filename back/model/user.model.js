@@ -1,11 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
+
 const userSchema = new mongoose.Schema(
     {
-        id: {
-            type: Number,
-            require: true,
-            unique: true,
-        },
         username: {
             type: String,
             require: true,
@@ -17,25 +13,14 @@ const userSchema = new mongoose.Schema(
             require: true,
             trim: true,
         },
-        listtodos: [{
-            idlisttodo: {
-                type: Number,
-                require: true,
-                unique: true,
-            },
+        listtodo: [{
             namelisttodo: {
                 type: String,
                 require: true,
                 trim: true,
             },
             todos: [{
-                idtodo: {
-                    type: Number,
-                    require: true,
-                    unique: true,
-                    autoIndex: false
-                },
-                title: {
+                titleToDo: {
                     type: String,
                     require: true,
                     trim: true,
@@ -58,8 +43,8 @@ const userSchema = new mongoose.Schema(
     {
         timestamps: true,
     }
-)
+);
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("users", userSchema);
 
-module.exports = User
+module.exports = User;
