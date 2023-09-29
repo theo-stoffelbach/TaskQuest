@@ -66,27 +66,16 @@ module.exports.updateUserService = async (id, changeValue) => {
     }
 }
 
-
-// try {
-//     const articleUpdate = await articlesModel.findOneAndUpdate(
-//         {title: article.title},
-//         {
-//             $set: {
-//                 releaseDate: articleScrapped.releaseDate,
-//                 image: articleScrapped.image,
-//                 stock: articleScrapped.stock,
-//                 description: articleScrapped.description,
-//                 link: articleScrapped.link
-//             }
-//         },
-//         {new : true, upsert: true, setDefaultsOnInsert: true})
-//     if (!article) {
-//         return "Bug durring the writting Data Article not found ?! :/ : " + err;
-//     }
-//     return "Successfully to update Article : " + article.title + "( id : " + article._id + " ) ";
-// } catch (err) {
-//     return "Bug durring the update Data :/ : " + err;
-// }
+module.exports.updateATodo = async (id, changeTodo) => {
+    try {
+        return await userModel.findOneAndUpdate(
+            {_id: id},
+            changeValue
+        );
+    } catch (err) {
+        return "error to put data in DB" + err;
+    }
+}
 
 module.exports.test = async () => {
     try {
