@@ -1,7 +1,6 @@
 import React from 'react';
 import "../../Style/todoList.css";
 import Todo from "./Todo";
-import todo from "./Todo";
 
 function TodoList(props) {
 
@@ -9,10 +8,13 @@ function TodoList(props) {
         <div className="todoList">
             <div className="headerTodos">
                 <h2>{props.props.nameTodo}</h2>
-                <h3>{props.props.todo.length}</h3>
+                <h3>{props.props.todo.filter(test => {
+                    return !test.completed;
+                    // return test
+                }).length}</h3>
             </div>
             <div className="todos">
-                {props.props.todo.map((todo, index) => {
+                {props.props.todo.map(todo => {
                     return <Todo key={todo.id}
                                  todo={todo}
                                  setTodo={props.changeTodo}

@@ -16,13 +16,11 @@ function Todo(props) {
         setTodo(props.nameList, todo.id);
     }
 
-    function handleClickEdit(e) {
+    function handleClickEdit() {
         SetEdit(!edit);
     }
 
     function OnchangeEdit(e) {
-        console.log("e : ", e);
-        console.log("e : ", e.target.value);
         todoEdit(props.nameList, todo.id, e.target.value);
     }
 
@@ -34,7 +32,12 @@ function Todo(props) {
             </div>
             <div className="bottomTodo">
                 {edit ?
-                    (<input type="text" value={todo.title} onChange={e => OnchangeEdit(e)}/>) :
+                    (
+                        <div className="inputUpdate">
+                            <textarea value={todo.title} onChange={e => OnchangeEdit(e)}/>
+                            <i className="editEnable"></i>
+                        </div>
+                    ) :
                     (<p>{todo.title}</p>)
 
                 }

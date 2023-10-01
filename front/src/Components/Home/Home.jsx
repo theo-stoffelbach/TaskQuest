@@ -46,8 +46,6 @@ function Home() {
                         // console.log(todos)
                         todos.forEach(Lists => {
                             if (Lists.id === listId) {
-                                // console.log("Lists.id")
-                                // console.log(Lists.todo)
                                 Lists.todo.forEach(todo => {
                                     if (todo.id === id) todo.completed = !todo.completed;
                                 })
@@ -58,7 +56,6 @@ function Home() {
                     }
 
                     function toggleToDoEdit(listId, id, value) {
-                        console.log("i : ")
                         const todos = [...todoLists];
                         // console.log(todos)
                         todos.forEach(Lists => {
