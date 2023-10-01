@@ -66,11 +66,11 @@ module.exports.updateUserService = async (id, changeValue) => {
     }
 }
 
-module.exports.updateATodo = async (id, changeTodo) => {
+
+module.exports.deleteUserService = async (id, changeValue) => {
     try {
-        return await userModel.findOneAndUpdate(
-            {_id: id},
-            changeValue
+        return await userModel.findOneAndDelete(
+            {_id: id}
         );
     } catch (err) {
         return "error to put data in DB" + err;

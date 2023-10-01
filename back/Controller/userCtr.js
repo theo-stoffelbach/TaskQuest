@@ -17,15 +17,24 @@ module.exports.updateUser = async (req, res) => {
     else res.status(404).json({message: "404 Not found ..."})
 }
 
-module.exports.testC = async (req, res) => {
-    const user = await userService.test();
-    if (user) res.status(201).json({user: user})
-    else res.status(404).json({message: "404 Not found ..."})
-}
+// Change this func in Srv instead of Ctr
 
 module.exports.getAllUser = async (req, res) => {
     const user = await userModel.find().select();
     res.status(200).json(user);
 }
 
+module.exports.deleteUser = async (req, res) => {
+    const {id} = req.body;
 
+    const user = await userService.deleteUserService(id);
+    if (user) res.status(201).json({user: user})
+    else res.status(404).json({message: "404 Not found ..."})
+}
+
+
+module.exports.testC = async (req, res) => {
+    const user = await userService.test();
+    if (user) res.status(201).json({user: user})
+    else res.status(404).json({message: "404 Not found ..."})
+}
