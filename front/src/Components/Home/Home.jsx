@@ -4,34 +4,21 @@ import "../../Style/home.css"
 
 function Home() {
     const [todoLists, setTodoLists] = useState(null)
+    const [user, setEdit] = useState(null)
 
 
     useEffect(() => {
         function createToDo() {
-            fetch('https://jsonplaceholder.typicode.com/todos')
+            fetch('http://localhost:8080/api/')
                 .then(response => response.json())
                 .then(response => {
-                    const responsePart1 = {
-                        id: 1,
-                        nameTodo: "Maison",
-                        todo: response.splice(0, 5)
-                    }
-                    const responsePart2 = {
-                        id: 3,
-                        nameTodo: "Minecraft",
-                        todo: response.splice(0, 5)
-                    }
-
-                    setTodoLists([responsePart1, responsePart2]);
+                    console.log(response[0].listtodo)
+                    setTodoLists(response[0].listtodo);
                 })
         }
 
         return () => createToDo()
     }, []);
-
-    // useEffect(() => {
-    //     if (todoLists !== null) console.log(todoLists)
-    // }, [todoLists]);
 
     if (todoLists === null) {
         console.log("Loading ... ")
@@ -45,9 +32,9 @@ function Home() {
                         const todos = [...todoLists];
                         // console.log(todos)
                         todos.forEach(Lists => {
-                            if (Lists.id === listId) {
-                                Lists.todo.forEach(todo => {
-                                    if (todo.id === id) todo.completed = !todo.completed;
+                            if (Lists._id === listId) {
+                                Lists.todos.forEach(todo => {
+                                    if (todo._id === id) todo.completed = !todo.completed;
                                 })
                             }
                         })
@@ -59,9 +46,9 @@ function Home() {
                         const todos = [...todoLists];
                         // console.log(todos)
                         todos.forEach(Lists => {
-                            if (Lists.id === listId) {
-                                Lists.todo.forEach(todo => {
-                                    if (todo.id === id) todo.title = value;
+                            if (Lists._id === listId) {
+                                Lists.todos.forEach(todo => {
+                                    if (todo._id === id) todo.description = value;
                                 })
                             }
                         })
@@ -71,6 +58,7 @@ function Home() {
 
                     return (<TodoList key={index}
                                       props={todoList}
+                                      ListId={todoList._id}
                                       setTodo={setTodoLists}
                                       changeTodo={toggleToDoCompleted}
                                       todoEdit={toggleToDoEdit}/>)
