@@ -6,19 +6,20 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function Todo(props) {
     const [edit, setEdit] = useState(false)
-    const [updateText, setUpdateText] = useState(false)
+    const [updateText, setUpdateText] = useState(props.todo.description)
     const inputRef = useRef(null);
 
     let setTodo = props.setTodo
     let todoEdit = props.todoEdit
     let todo = props.todo
 
-
     useEffect(() => {
         const funcInputSave = (e) => {
             if (inputRef.current !== null && !inputRef.current.parentNode.contains(e.target)) {
-                console.log(inputRef.current.getElementsByClassName("TextArea")[0].value)
+                let value = inputRef.current.getElementsByClassName("TextArea")[0].value
+                console.log("value : ", value)
                 setEdit((prevEdit) => !prevEdit);
+                todoEdit(props.nameList, todo._id, value);
             }
         }
 
@@ -39,7 +40,8 @@ function Todo(props) {
 
     function OnchangeEdit(e) {
         console.log("props ", props.nameList)
-        todoEdit(props.nameList, todo._id, e.target.value);
+        setUpdateText(e.target.value)
+        // DURING EDIT
     }
 
     return (
@@ -52,7 +54,7 @@ function Todo(props) {
                 {edit ?
                     (
                         <div className="inputUpdate" ref={inputRef}>
-                            <textarea className="TextArea" value={todo.description} onChange={e => OnchangeEdit(e)}/>
+                            <textarea className="TextArea" value={updateText} onChange={e => OnchangeEdit(e)}/>
                             <i className="editEnable"></i>
                         </div>
 

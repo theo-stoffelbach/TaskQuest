@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'redaxios';
+
 import TodoList from "./TodoList";
 import "../../Style/home.css"
 
 function Home() {
     const [todoLists, setTodoLists] = useState(null)
-    const [user, setEdit] = useState(null)
 
 
     useEffect(() => {
@@ -20,6 +21,25 @@ function Home() {
         return () => createToDo()
     }, []);
 
+    useEffect(() => {
+        function createToDo() {
+            axios({
+                method: 'post',
+                url: 'http://localhost:8080/api/update',
+                data: {
+                    // todoList
+                    // changeValue:
+                }
+            })
+                .then(() => {
+                    console.log("Miam");
+                })
+            console.log("deed");
+        }
+
+        return () => createToDo();
+    })
+
     if (todoLists === null) {
         console.log("Loading ... ")
     } else {
@@ -30,7 +50,6 @@ function Home() {
                     function toggleToDoCompleted(listId, id) {
                         console.log("i : " + id)
                         const todos = [...todoLists];
-                        // console.log(todos)
                         todos.forEach(Lists => {
                             if (Lists._id === listId) {
                                 Lists.todos.forEach(todo => {
@@ -38,13 +57,11 @@ function Home() {
                                 })
                             }
                         })
-                        // console.log(props)
                         setTodoLists(todos)
                     }
 
                     function toggleToDoEdit(listId, id, value) {
                         const todos = [...todoLists];
-                        // console.log(todos)
                         todos.forEach(Lists => {
                             if (Lists._id === listId) {
                                 Lists.todos.forEach(todo => {
@@ -52,7 +69,6 @@ function Home() {
                                 })
                             }
                         })
-                        // console.log(props)
                         setTodoLists(todos)
                     }
 
