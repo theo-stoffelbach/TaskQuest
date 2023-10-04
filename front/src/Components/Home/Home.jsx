@@ -3,10 +3,11 @@ import axios from 'redaxios';
 
 import TodoList from "./TodoList";
 import "../../Style/home.css"
+import todoList from "./TodoList";
 
 function Home() {
     const [todoLists, setTodoLists] = useState(null)
-
+    const userId = "6517267796c2b61eb0ee3ab4"
 
     useEffect(() => {
         function createToDo() {
@@ -21,25 +22,6 @@ function Home() {
         return () => createToDo()
     }, []);
 
-    useEffect(() => {
-        function createToDo() {
-            axios({
-                method: 'post',
-                url: 'http://localhost:8080/api/update',
-                data: {
-                    // todoList
-                    // changeValue:
-                }
-            })
-                .then(() => {
-                    console.log("Miam");
-                })
-            console.log("deed");
-        }
-
-        return () => createToDo();
-    })
-
     if (todoLists === null) {
         console.log("Loading ... ")
     } else {
@@ -47,6 +29,29 @@ function Home() {
         return (
             <div id="allTodos">
                 {todoLists.map((todoList, index) => {
+
+                    function SaveToDo() {
+                        if (todoLists !== null) {
+                            axios({
+                                method: 'post',
+                                url: 'http://localhost:8080/api/update',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                data: {
+                                    id: userId,
+                                    changeValue: {
+                                        listtodo: todoLists
+                                    }
+                                }
+                            })
+                                .then(() => {
+                                    console.log("Miam");
+                                })
+                            console.log("deed");
+                        }
+                    }
+
                     function toggleToDoCompleted(listId, id) {
                         console.log("i : " + id)
                         const todos = [...todoLists];
@@ -66,6 +71,7 @@ function Home() {
                             if (Lists._id === listId) {
                                 Lists.todos.forEach(todo => {
                                     if (todo._id === id) todo.description = value;
+                                    SaveToDo();
                                 })
                             }
                         })

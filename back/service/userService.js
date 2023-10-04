@@ -57,9 +57,10 @@ module.exports.register = async (username, password) => {
 
 module.exports.updateUserService = async (id, changeValue) => {
     try {
+        console.log("listtodo : ", changeValue.listtodo)
         return await userModel.findOneAndUpdate(
             {_id: id},
-            changeValue
+            changeValue.listtodo
         );
     } catch (err) {
         return "error to put data in DB" + err;
