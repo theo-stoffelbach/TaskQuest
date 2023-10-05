@@ -17,7 +17,7 @@ function Todo(props) {
         const funcInputSave = (e) => {
             if (inputRef.current !== null && !inputRef.current.parentNode.contains(e.target)) {
                 let value = inputRef.current.getElementsByClassName("TextArea")[0].value
-                console.log("value : ", value)
+                // console.log("value : ", value)
                 setEdit((prevEdit) => !prevEdit);
                 todoEdit(props.nameList, todo._id, value);
             }
@@ -36,14 +36,13 @@ function Todo(props) {
 
     function handleClickEdit() {
         setEdit(!edit);
-        console.log("test : ", edit)
         if (edit) {
             todoEdit(props.nameList, todo._id, inputRef.current.getElementsByClassName("TextArea")[0].value);
         }
     }
 
     function OnchangeEdit(e) {
-        console.log("props ", props.nameList)
+        // console.log("props ", props.nameList)
         setUpdateText(e.target.value)
     }
 
