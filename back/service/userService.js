@@ -47,7 +47,7 @@ const listtodo = [
     }
 ]
 
-module.exports.register = async (username, password) => {
+const register = async (username, password) => {
     try {
         return await userModel.create({username, password, listtodo});
     } catch (err) {
@@ -55,12 +55,12 @@ module.exports.register = async (username, password) => {
     }
 }
 
-module.exports.updateUserService = async (id, changeValue) => {
+const updateUserService = async (id, changeValue) => {
     try {
-        console.log("listtodo : ", changeValue.listtodo)
+        console.log("listtodo : ", changeValue)
         return await userModel.findOneAndUpdate(
             {_id: id},
-            changeValue.listtodo
+            changeValue
         );
     } catch (err) {
         return "error to put data in DB" + err;
@@ -68,7 +68,7 @@ module.exports.updateUserService = async (id, changeValue) => {
 }
 
 
-module.exports.deleteUserService = async (id, changeValue) => {
+const deleteUserService = async (id, changeValue) => {
     try {
         return await userModel.findOneAndDelete(
             {_id: id}
@@ -78,10 +78,12 @@ module.exports.deleteUserService = async (id, changeValue) => {
     }
 }
 
-module.exports.test = async () => {
+const test = async () => {
     try {
         return await testModel.create({nom, prenom});
     } catch (err) {
         return "error to put data in DB" + err;
     }
 }
+
+module.exports = {register, updateUserService, deleteUserService, test}

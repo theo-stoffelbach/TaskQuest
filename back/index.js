@@ -1,11 +1,19 @@
 const express = require('express')
-const app = express()
-const port = 8080
-const userCtr = require('./Controller/userCtr')
-require('./db/db');
-const userRouter = require("./router/userRoute");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+
+// import express from 'express';
+// import bodyParser from "body-parser";
+// import cors from "cors";
+
+const userRouter = require("./router/userRoute");
+require('./db/db');
+
+// import userRouter from "./router/userRoute.js";
+
+
+const app = express()
+const port = 8080
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

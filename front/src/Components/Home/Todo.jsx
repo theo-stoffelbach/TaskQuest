@@ -4,50 +4,70 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 
-function Todo(props) {
+function Todo({setTodo, todoEdit, todo, nameList}) {
     const [edit, setEdit] = useState(false)
-    const [updateText, setUpdateText] = useState(props.todo.description)
-    const inputRef = useRef(null);
+    const [updateText, setUpdateText] = useState(todo.description)
+    const [click, setClick] = useState(0)
 
-    let setTodo = props.setTodo
-    let todoEdit = props.todoEdit
-    let todo = props.todo
+    const todoRef = useRef(null);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         const funcInputSave = (e) => {
-            if (inputRef.current !== null && !inputRef.current.parentNode.contains(e.target)) {
-                let value = inputRef.current.getElementsByClassName("TextArea")[0].value
-                // console.log("value : ", value)
-                setEdit((prevEdit) => !prevEdit);
-                todoEdit(props.nameList, todo._id, value);
+            // console.log(e.target)
+            // console.log(!todoRef.current.contains(e.target))
+
+            console.log("edit : Yes")
+            
+            if (todoRef.current !== null && !todoRef.current.contains(e.target) && edit) {
+                // console.log("edit : ", inputRef.current.contains(e.target))
+                console.log("edit : Yes")
+                // console.log(todoRef.current)
+                // console.log(!todoRef.current.contains(e.target))
+                // console.log(todoRef.current)
+                // console.log(todoRef.current.contains)
+                // console.log("todoRef : ", todoRef.current.contains(e.target))
+
+                // let value = inputRef.current.getElementsByClassName("TextArea")[0].value
+                // setEdit((prevEdit) => !prevEdit);
+                // todoEdit(nameList, todo._id, value);
             }
         }
 
-        document.addEventListener("click", funcInputSave)
+
+        todoRef.current.addEventListener("click", funcInputSave)
 
         return () => {
-            document.removeEventListener('click', funcInputSave);
+            todoRef.current.removeEventListener('click', funcInputSave);
         };
-    }, [inputRef]);
+    }, [edit]);
 
     function handleClick() {
-        setTodo(props.nameList, todo._id);
+        setTodo(nameList, todo._id);
+    }
+
+    function handleClickInputToEdit() {
+        if (click === 0) {
+            setClick(prevClick => prevClick + 1);
+            setTimeout(() => {
+                setClick(0);
+            }, 500)
+        } else {
+            setEdit(!edit)
+            setClick(0)
+        }
     }
 
     function handleClickEdit() {
         setEdit(!edit);
-        if (edit) {
-            todoEdit(props.nameList, todo._id, inputRef.current.getElementsByClassName("TextArea")[0].value);
+        if (!edit) {
+            return
         }
-    }
-
-    function OnchangeEdit(e) {
-        // console.log("props ", props.nameList)
-        setUpdateText(e.target.value)
+        todoEdit(nameList, todo._id, inputRef.current.getElementsByClassName("TextArea")[0].value);
     }
 
     return (
-        <div className="todo">
+        <div className="todo" ref={todoRef}>
             <div className="headerTodo">
                 <div className={`checkBox ${todo.completed ? "finish" : "notfinish"}`} onClick={handleClick}></div>
                 <h4>{todo.titleToDo}</h4>
@@ -56,12 +76,14 @@ function Todo(props) {
                 {edit ?
                     (
                         <div className="inputUpdate" ref={inputRef}>
-                            <textarea className="TextArea" value={updateText} onChange={e => OnchangeEdit(e)}/>
+                            <textarea className="TextArea" value={updateText}
+                                      onChange={e => setUpdateText(e.target.value)
+                                      }/>
                             <i className="editEnable"></i>
                         </div>
 
                     ) :
-                    (<p>{todo.description}</p>)
+                    (<p onClick={handleClickInputToEdit}>{todo.description}</p>)
                 }
                 <div className="editIconContainer" onClick={handleClickEdit}>
                     <FontAwesomeIcon className="editIcon" icon={faPenToSquare} style={{color: "#ffffff",}}/>
