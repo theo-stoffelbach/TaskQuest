@@ -17,8 +17,7 @@ function Todo({setTodo, todoEdit, todo, nameList}) {
             // console.log(e.target)
             // console.log(!todoRef.current.contains(e.target))
 
-            console.log("edit : Yes")
-            
+            console.log("edit : Y
             if (todoRef.current !== null && !todoRef.current.contains(e.target) && edit) {
                 // console.log("edit : ", inputRef.current.contains(e.target))
                 console.log("edit : Yes")
