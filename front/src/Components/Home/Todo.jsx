@@ -4,23 +4,43 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 
-function Todo({setTodo, todoEdit, todo, nameList}) {
+function Todo({setTodo, todoEdit, todo, nameList, funcInputSave}) {
     const [edit, setEdit] = useState(false)
     const [updateText, setUpdateText] = useState(todo.description)
     const [click, setClick] = useState(0)
+    const [clickToEditcount, setclickToEditcount] = useState(0)
 
+    const todoClickCountnRef = useRef(null);
+    const setclickToEditcountRef = useRef(null);
     const todoRef = useRef(null);
     const inputRef = useRef(null);
+    todoClickCountnRef.current = clickToEditcount;
+    setclickToEditcountRef.current = setclickToEditcount;
+
 
     useEffect(() => {
         const funcInputSave = (e) => {
+            setclickToEditcountRef.current(prevClickToEditcount => prevClickToEditcount + 1);
+
+            console.log(clickToEditcount)
+
+            if (todoClickCountnRef === 2) {
+                setTimeout(() => {
+                    setclickToEditcountRef.current(0);
+                    console.log("NOPE")
+                }, 500)
+                return;
+            }
+
+            // console.log(todoClickCountnRef)
+
             // console.log(e.target)
             // console.log(!todoRef.current.contains(e.target))
 
-            console.log("edit : Y
-            if (todoRef.current !== null && !todoRef.current.contains(e.target) && edit) {
+            // console.log("edit : Y")
+            if (todoRef.current !== null && !todoRef.current.contains(e.target)) {
                 // console.log("edit : ", inputRef.current.contains(e.target))
-                console.log("edit : Yes")
+                // console.log("edit : Yes")
                 // console.log(todoRef.current)
                 // console.log(!todoRef.current.contains(e.target))
                 // console.log(todoRef.current)
@@ -33,13 +53,12 @@ function Todo({setTodo, todoEdit, todo, nameList}) {
             }
         }
 
-
-        todoRef.current.addEventListener("click", funcInputSave)
+        document.addEventListener("click", funcInputSave);
 
         return () => {
-            todoRef.current.removeEventListener('click', funcInputSave);
-        };
-    }, [edit]);
+            document.removeEventListener("click", funcInputSave)
+        }
+    }, [setclickToEditcount]);
 
     function handleClick() {
         setTodo(nameList, todo._id);
