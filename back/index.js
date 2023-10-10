@@ -22,5 +22,5 @@ app.use(cors());
 app.use("/api", userRouter)
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`\n\n\x1b[4m\x1b[33m[\x1b[1m127.0.0.1:${port}\x1b[0m\x1b[4m\x1b[33m]\x1b[0m\x1b[36m The server turn on port ${port}\x1b[0m`)
 })

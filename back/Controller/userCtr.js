@@ -17,6 +17,14 @@ module.exports.updateUser = async (req, res) => {
     else res.status(404).json({message: "404 Not found ..."})
 }
 
+module.exports.removeTodoService = async (req, res) => {
+    const {idTodo, idListTodo} = req.body;
+
+    const user = await userService.removeTodoService(req.params.id, idListTodo, idTodo);
+    if (user) res.status(201).json({user: user})
+    else res.status(404).json({message: "404 Not found ..."})
+}
+
 // Change this func in Srv instead of Ctr
 
 module.exports.getAllUser = async (req, res) => {

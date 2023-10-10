@@ -7,5 +7,7 @@ mongoose.connect('mongodb+srv://' + process.env.DB_USER_NAME + ':' + process.env
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-    .then(() => console.log("Connection successfully to MongoDB"))
+    //
+
+    .then(() => console.log(`\x1b[32mConnection successfully to \x1b[1m\x1b[4mMongoDB\x1b[0m\n\n`))
     .catch(err => console.log("Error BDD : " + err));

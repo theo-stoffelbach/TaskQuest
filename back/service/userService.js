@@ -55,21 +55,6 @@ const register = async (username, password) => {
     }
 }
 
-const createTodo = async (id, idTodo) => {
-    try {
-        const user = await readOneUserService(id);
-        console.log(user)
-        user.listtodo.forEach(listTodo => {
-            console.log(listTodo)
-            if (listTodo._id === idTodo) {
-                console.log("test : ", listTodo)
-            }
-        })
-
-    } catch (err) {
-        return "error to put data in DB" + err;
-    }
-}
 
 const updateUserService = async (id, changeValue) => {
     try {
@@ -94,11 +79,11 @@ const readAllUsersService = async () => {
 
 const readOneUserService = async (id) => {
     console.log("id : ", id)
-    // try {
-    //     return await userModel.findOne({_id: id});
-    // } catch (err) {
-    //     return {error: "error to put data in DB" + err}
-    // }
+    try {
+        return await userModel.findOne({_id: id});
+    } catch (err) {
+        return {error: "error to put data in DB" + err}
+    }
 }
 
 const deleteUserService = async (id, changeValue) => {
@@ -111,6 +96,23 @@ const deleteUserService = async (id, changeValue) => {
     }
 }
 
+
+const removeTodoService = async (id, idList, idTodo) => {
+    console.log("Fin");
+    console.log("Fin : ", id, " : ", idList);
+    try {
+        return await userModel.findOneAndUpdate(
+            {_id: id, 'listtodo._id': idList},
+            {$pull: {'listtodo.$.todos': {_id: idTodo}}},
+            {new: true}
+        );
+
+    } catch (err) {
+        return {error: "error to put data in DB" + err}
+    }
+}
+
+
 const test = async () => {
     try {
         return await testModel.create({nom, prenom});
@@ -121,10 +123,11 @@ const test = async () => {
 
 module.exports = {
     register,
-    createTodo,
+    // createTodo,
     updateUserService,
     readAllUsersService,
     readOneUserService,
     deleteUserService,
+    removeTodoService,
     test
 }
