@@ -1,4 +1,3 @@
-const userModel = require('../model/user.model');
 const userService = require('../service/userService');
 
 module.exports.register = async (req, res) => {
@@ -25,10 +24,8 @@ module.exports.removeTodoService = async (req, res) => {
     else res.status(404).json({message: "404 Not found ..."})
 }
 
-// Change this func in Srv instead of Ctr
-
 module.exports.getAllUser = async (req, res) => {
-    const user = await userModel.find().select();
+    const user = await userService.readAllUsersService();
     res.status(200).json(user);
 }
 
