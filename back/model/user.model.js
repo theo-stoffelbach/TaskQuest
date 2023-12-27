@@ -16,23 +16,23 @@ const userSchema = new mongoose.Schema(
         listtodo: [{
             namelisttodo: {
                 type: String,
-                require: true,
+                // require: true,
                 trim: true,
             },
             todos: [{
                 titleToDo: {
                     type: String,
-                    require: true,
+                    // require: true,
                     trim: true,
                 },
                 description: {
                     type: String,
-                    require: true,
+                    // require: true,
                     trim: true,
                 },
                 completed: {
                     type: Boolean,
-                    require: true,
+                    // require: true,
                     trim: true,
                     default: false,
 

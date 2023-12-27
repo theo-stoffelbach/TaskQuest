@@ -4,52 +4,52 @@ const testModel = require('../model/test.model');
 const nom = "theo";
 const prenom = "theos123";
 
-const listtodo = [
-    {
-        namelisttodo: "Home",
-        todos: [
-            {
-                titleToDo: "Title One !",
-                description: "Something",
-                completed: false
-            },
-            {
-                titleToDo: "Title two !",
-                description: "Other something",
-                completed: false
-            },
-            {
-                titleToDo: "Toulouse man !",
-                description: "Other something",
-                completed: false
-            },
-        ]
-    },
-    {
-        namelisttodo: "Usualy",
-        todos: [
-            {
-                titleToDo: "Title two !",
-                description: "Something",
-                completed: false
-            },
-            {
-                titleToDo: "Title two !",
-                description: "Other something",
-                completed: false
-            },
-            {
-                titleToDo: "Toulouse man !",
-                description: "Other something",
-                completed: false
-            },
-        ]
-    }
-]
+// const listtodo = [
+//     {
+//         namelisttodo: "Home",
+//         todos: [
+//             {
+//                 titleToDo: "Title One !",
+//                 description: "Something",
+//                 completed: false
+//             },
+//             {
+//                 titleToDo: "Title two !",
+//                 description: "Other something",
+//                 completed: false
+//             },
+//             {
+//                 titleToDo: "Toulouse man !",
+//                 description: "Other something",
+//                 completed: false
+//             },
+//         ]
+//     },
+//     {
+//         namelisttodo: "Usualy",
+//         todos: [
+//             {
+//                 titleToDo: "Title two !",
+//                 description: "Something",
+//                 completed: false
+//             },
+//             {
+//                 titleToDo: "Title two !",
+//                 description: "Other something",
+//                 completed: false
+//             },
+//             {
+//                 titleToDo: "Toulouse man !",
+//                 description: "Other something",
+//                 completed: false
+//             },
+//         ]
+//     }
+// ]
 
 const register = async (username, password) => {
     try {
-        return await userModel.create({username, password, listtodo});
+        return await userModel.create({username, password});
     } catch (err) {
         return "error to put data in DB" + err;
     }
@@ -94,7 +94,6 @@ const deleteUserService = async (id) => {
         return "error to put data in DB" + err;
     }
 }
-
 
 const test = async () => {
     try {

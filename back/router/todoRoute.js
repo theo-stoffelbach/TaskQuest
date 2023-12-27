@@ -1,9 +1,9 @@
 const userRouter = require('express').Router();
-const userCtr = require("../Controller/userCtr");
+const todoCtr = require("../Controller/todoCtr");
 
 // userRouter.get("/:id", userCtr.getTodoOfUser);
 // userRouter.post("/update", userCtr.updateTodo);
-// userRouter.post("/register", userCtr.addTodo);
-userRouter.post("/remove/:id", userCtr.removeTodoService);
+userRouter.post("/register", todoCtr.addTodo);
+userRouter.post("/remove/:id", todoCtr.removeTodoService);
 
 module.exports = userRouter;

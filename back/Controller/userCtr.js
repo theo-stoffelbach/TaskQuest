@@ -1,9 +1,9 @@
 const userService = require('../service/userService');
 
 module.exports.register = async (req, res) => {
-    const {name, password} = req.body;
+    const {username, password} = req.body;
 
-    const user = await userService.register(name, password);
+    const user = await userService.register(username, password);
     if (user) res.status(201).json({user: user})
     else res.status(404).json({message: "404 Not found ..."})
 }

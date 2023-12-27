@@ -8,18 +8,15 @@ function Home() {
     const [todoLists, setTodoLists] = useState(null)
     const userId = "6517267796c2b61eb0ee3ab4"
 
-    const todoRef = null
-    console.log("--------------")
-
     useEffect(() => {
         axios({
             method: 'get',
-            url: 'http://localhost:8080/api/',
+            url: 'http://localhost:8080/api/user    ',
         })
             .then(response => {
                 console.log(response)
                 setTodoLists(response.data[0].listtodo);
-            }).catch(err => console.log("error : ", err))
+            }).catch(err => console.error("error : ", err))
     }, []);
 
     // useEffect(() => {

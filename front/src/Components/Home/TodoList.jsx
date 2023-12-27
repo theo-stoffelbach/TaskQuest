@@ -4,10 +4,16 @@ import Todo from "./Todo";
 
 function TodoList(props) {
 
+    function addTodos() {
+        console.log("test");
+        
+    }
+
+
     return (
         <div className="todoList">
             <div className="headerTodos">
-                <h2>{props.props.nameTodo}</h2>
+                <h2>{props.props.namelisttodo}</h2>
                 <h3>{props.props.todos.filter(test => {
                     return !test.completed;
                     // return test
@@ -22,6 +28,12 @@ function TodoList(props) {
                                  nameList={props.props._id}
                     />
                 })}
+            </div>
+            <div className="bottomTodoslist">
+                <div className="addLogo" onClick={addTodos}>
+                    <i className="verticalStick"></i>
+                    <i className="horizontalStick"></i>
+                </div>
             </div>
         </div>
     );

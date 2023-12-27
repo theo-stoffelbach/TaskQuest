@@ -4,29 +4,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 
-function Todo({setTodo, todoEdit, todo, nameList, funcInputSave}) {
+function Todo({setTodo, todoEdit, todo, nameList}) {
     const [edit, setEdit] = useState(false)
     const [updateText, setUpdateText] = useState(todo.description)
     const [click, setClick] = useState(0)
-    const [clickToEditcount, setclickToEditcount] = useState(0)
+    const [clickToEditCount, setClickToEditCount] = useState(0)
 
     const todoClickCountnRef = useRef(null);
-    const setclickToEditcountRef = useRef(null);
+    const setclickToEditcouCtRef = useRef(null);
     const todoRef = useRef(null);
     const inputRef = useRef(null);
-    todoClickCountnRef.current = clickToEditcount;
-    setclickToEditcountRef.current = setclickToEditcount;
-
+    todoClickCountnRef.current = clickToEditCount;
+    setclickToEditcouCtRef.current = setClickToEditCount;
 
     useEffect(() => {
         const funcInputSave = (e) => {
-            setclickToEditcountRef.current(prevClickToEditcount => prevClickToEditcount + 1);
-
-            console.log(clickToEditcount)
+            setclickToEditcouCtRef.current(prevClickToEditcount => prevClickToEditcount + 1);
 
             if (todoClickCountnRef === 2) {
                 setTimeout(() => {
-                    setclickToEditcountRef.current(0);
+                    setclickToEditcouCtRef.current(0);
                     console.log("NOPE")
                 }, 500)
                 return;
@@ -58,7 +55,7 @@ function Todo({setTodo, todoEdit, todo, nameList, funcInputSave}) {
         return () => {
             document.removeEventListener("click", funcInputSave)
         }
-    }, [setclickToEditcount]);
+    }, [setClickToEditCount]);
 
     function handleClick() {
         setTodo(nameList, todo._id);
